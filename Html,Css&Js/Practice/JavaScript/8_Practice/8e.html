@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EXERCISE pRACTIce</title>
+</head>
+<body>
+  <script>
+    function IsSamePrice(product1,product2){
+
+      if(Amazon_Project.product1.name===Amazon_Project.product2.name&&product1.price === product2.price){
+        return true;
+      }else
+      {
+        return false;
+      }
+    }
+
+    
+    
+    const Amazon_Project ={
+      product1:{
+      name:'basketball',
+      price: 1000
+    },
+     product2:{
+      name:'basketball',
+      price: 1000
+    },
+    product3:{
+      name:'Football',
+      price: 1000
+    }
+  };
+    console.log(IsSamePrice(Amazon_Project.product1,Amazon_Project.product2));
+
+    let name ='udbhaw';
+    let repeatedstring = "name \n".repeat(3);
+    console.log(name.toLowerCase());
+    console.log(repeatedstring);
+
+  </script>
+</body>
+</html>
