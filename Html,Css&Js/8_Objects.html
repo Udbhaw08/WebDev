@@ -10,7 +10,7 @@
 
   <script>
 
-    const  product = {
+   /* const  product = {
       name: 'udbhaw',
       age:21
     };
@@ -23,8 +23,77 @@
     console.log(product.name);
 
     product.hello ='hii';
-    console.log(product);
+    console.log(product);*/
 
+   /* const product2={
+      name:'shirt',
+      'delivery-time':4 ,
+      rating:{
+        hii: 'hoooo',
+        hello: 'yopo'
+      },
+      fun : function function1(){
+        console.log('hello by fun');
+
+      }
+    };
+    console.log(product2.delivery_time );
+    console.log(product2['name']);
+    product2.fun();
+    console.log(typeof console.log);
+
+    console.log(JSON.stringify(product2));
+    const jsontostring=JSON.parse(JSON.stringify(product2));
+    console.log(jsontostring); */
+
+
+
+      console.log('hello'.length);
+      console.log('hello'.toUpperCase());
+
+      const object1={
+        message :'hello'
+      };
+      const object2=object1;
+      object2.message='good job'
+
+      console.log(object2);
+
+    const object3 ={
+       message :'hello'
+    };
+
+    console.log(object3===object1);
+
+      const object4 ={
+      message :'hello'
+    };
+
+    //const message=object4.message;
+    //destructing 
+    const{message}=object4;
+    console.log(message);
+
+
+    //shorthand property
+    const object5={
+      message:message
+    };
+
+    console.log(object5);
+
+    //shorthand method
+    const object6={
+      message:message,
+      //method : function function1(){
+      //  console.log('helloeeeee');
+      //}
+      method(){
+        console.log('method');
+      }
+    };
+    object6.method();
+  
   </script>
 
 </body>
