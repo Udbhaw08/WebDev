@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DOM Projects</title>
+  </head>
+  <body>
+    <p>Amazon Shipping Calculator</p>
+
+    <input placeholder="Cost of order" class="js-cost-input" onkeydown="
+      handleCostKeydown(event);
+    ">
+
+    <button onclick="
+      calculateTotal();
+    ">Calculate</button>
+
+    <p class="js-total-cost"></p>
+
+    <script>
+      String(25)//value into string
+      console.log('25' - 5);//  -*/ automatically converts into number
+      console.log('25' + 5);// + dont change into number
+
+
+      Number(String(25))//converts string '25' back to the number 25
+      console.log(25 - 5);//regular math with numbers
+      console.log(25 + 5);// if we have to do in string convert it into number then calculate
+
+      window.document//'document' is part of the 'window' object
+      window.console.log('window');//'console' is also part of the 'window' object
+      window.alert//'alert' is also on the 'window' object
+
+      //this function runs when a key is pressed in the input box
+      function handleCostKeydown(event) {
+        //checks if the key that was pressed was the 'Enter' key
+        if (event.key === 'Enter') {
+          //if it was Enter, run the calculate function
+          calculateTotal();
+        }
+      }
+
+      //this function calculates the final cost
+      function calculateTotal() {
+        //gets the input element from the page
+        const inputElement = document.querySelector('.js-cost-input');
+        //gets the text from the input box and turns it into a number
+        let cost = Number(inputElement.value);
+
+        //checks if the cost is less than 40
+        if (cost < 40) {
+          //if it is, add 10 for the shipping cost
+          cost = cost + 10;
+        }
+
+        //gets the paragraph element for the result
+        document.querySelector('.js-total-cost')
+          //changes the text inside the paragraph to the final cost
+          .innerHTML = `$${cost}`;
+      }
+    </script>
+  </body>
+</html>
