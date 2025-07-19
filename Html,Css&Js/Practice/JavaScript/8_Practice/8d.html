@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EXERCISE pRACTIce</title>
+</head>
+<body>
+  <script>
+
+    const Amazon_Project ={
+      product1:{
+      name:'basketball',
+      price: 1000
+    },
+     product2:{
+      name:'Badminton',
+      price: 1000
+    },
+    fun : function comparePrice(product1,product2){
+      if(Amazon_Project.product1.price>Amazon_Project.product2.price){
+        console.log(Amazon_Project.product1);
+      }else if(Amazon_Project.product1.price<Amazon_Project.product2.price){
+        console.log(Amazon_Project.product2);
+      }else{
+        console.log('Both are equal price');
+      }
+    }
+    };
+    Amazon_Project.fun();
+
+  </script>
+</body>
+</html>
