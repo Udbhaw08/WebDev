@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Functions</title>
+</head>
+<body>
+  <script>
+
+    
+    const function1 = function greeting(){
+      console.log('hello2');
+    };
+    console.log(function1);
+    console.log(typeof function1);
+    function1();
+
+    const object1={
+      name: 2,
+      hello: function (){
+        console.log('hello3');
+      }
+    };
+
+    object1.hello();
+
+    function display(param){
+      console.log(param);
+    }
+    display(2);
+
+
+    function run(param){
+      param();
+    }
+    run(function(){
+      console.log('hello4');
+      
+    });
+
+
+    setTimeout(function1,3000);
+    setInterval(function1,3000);
+  </script>
+</body>
+</html>
