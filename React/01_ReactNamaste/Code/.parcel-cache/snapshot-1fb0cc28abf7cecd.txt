@@ -1,0 +1,19 @@
+18
+66C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\package.json133990373319726360 0
+64C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\.gitignore133990368364273231 0
+58C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\dist133990373306982894 1
+60C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\App.js133990374610726308 0
+64C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\index.html133990374724162181 0
+63C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\index.css133989971897741781 0
+71C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\package-lock.json133990372573778095 0
+66C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\node_modules133990372573537383 1
+71C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\node_modules\.bin133990372567740496 1
+85C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\node_modules\.package-lock.json133990372573788082 0
+84C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\node_modules\@msgpackr-extract133990372568242052 1
+73C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\node_modules\@lezer133990372570752855 1
+74C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\node_modules\@parcel133990372573574910 1
+72C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\node_modules\@lmdb133990372568259263 1
+76C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\node_modules\@mischnic133990372570752855 1
+71C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\node_modules\@swc133990372573172686 1
+65C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\dist\App.js133990373306903615 0
+69C:\Users\hp\Desktop\WebDev\React\01_ReactNamaste\Code\dist\App.js.map133990373306965307 0
