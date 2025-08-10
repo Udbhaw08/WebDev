@@ -1,0 +1,19 @@
+{
+  "name": "episode-04",
+  "version": "1.0.0",
+  "description": "esp 4 ",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Udbhaw Anand",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/preset-react": "^7.27.1",
+    "parcel": "^2.15.4"
+  },
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  }
+}
