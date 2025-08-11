@@ -726,6 +726,34 @@ var _bodyDefault = parcelHelpers.interopDefault(_body);
  *        import { Component } from 'path'; 
  
 */ const currYear = new Date().getFullYear();
+const Footer = ()=>{
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("footer", {
+        className: "footer",
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+            children: [
+                "Copyright \xa9 ",
+                currYear,
+                ", Made with \uD83D\uDC97 by ",
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
+                    children: "Vasu"
+                }, void 0, false, {
+                    fileName: "src/App.js",
+                    lineNumber: 70,
+                    columnNumber: 54
+                }, undefined)
+            ]
+        }, void 0, true, {
+            fileName: "src/App.js",
+            lineNumber: 69,
+            columnNumber: 7
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/App.js",
+        lineNumber: 68,
+        columnNumber: 5
+    }, undefined);
+};
+_c = Footer;
 const AppLayout = ()=>{
     // console.log(<Body />);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -733,30 +761,36 @@ const AppLayout = ()=>{
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _headerDefault.default), {}, void 0, false, {
                 fileName: "src/App.js",
-                lineNumber: 72,
+                lineNumber: 80,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _bodyDefault.default), {}, void 0, false, {
                 fileName: "src/App.js",
-                lineNumber: 73,
+                lineNumber: 81,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Footer, {}, void 0, false, {
+                fileName: "src/App.js",
+                lineNumber: 82,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/App.js",
-        lineNumber: 71,
+        lineNumber: 79,
         columnNumber: 5
     }, undefined);
 };
-_c = AppLayout;
+_c1 = AppLayout;
 const root = (0, _clientDefault.default).createRoot(document.getElementById('root'));
 root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(AppLayout, {}, void 0, false, {
     fileName: "src/App.js",
-    lineNumber: 80,
+    lineNumber: 88,
     columnNumber: 13
 }, undefined));
-var _c;
-$RefreshReg$(_c, "AppLayout");
+var _c, _c1;
+$RefreshReg$(_c, "Footer");
+$RefreshReg$(_c1, "AppLayout");
 
   $parcel$ReactRefreshHelpers$4089.postlude(module);
 } finally {
@@ -18622,13 +18656,12 @@ const Body = ()=>{
         fetchData();
     }, []);
     const fetchData = async ()=>{
-        const data = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.624480699999999&page_type=DESKTOP_WEB_LISTING');
+        const data = await fetch('https://corsproxy.io/https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6331132&lng=77.2972601&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING');
         const json = await data.json();
         console.log(json);
         // * optional chaining
-        // setListOfRestaurants(json.data.cards[2].data.data.cards);
-        setListOfRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-        setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
+        setListOfRestaurants(json?.data.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setFilteredRestaurant(json?.data.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     };
     // * Conditional Rendering
     // if (listOfRestaurants.length === 0) {
@@ -18665,7 +18698,7 @@ const Body = ()=>{
                                     // * Filter th restaurant cards and update the UI
                                     // * searchText
                                     console.log(searchText);
-                                    const filteredRestaurant = listOfRestaurants.filter((res)=>res.data.name.toLowerCase().includes(searchText.toLowerCase()));
+                                    const filteredRestaurant = listOfRestaurants.filter((res)=>res.info.name.toLowerCase().includes(searchText.toLowerCase()));
                                     setFilteredRestaurant(filteredRestaurant);
                                 },
                                 children: "Search"
@@ -18684,7 +18717,7 @@ const Body = ()=>{
                         className: "filter-btn",
                         onClick: ()=>{
                             // * Filter logic
-                            const filteredList = listOfRestaurants.filter((res)=>res.data.avgRating > 4);
+                            const filteredList = listOfRestaurants.filter((res)=>res.info.avgRating > 4);
                             setListOfRestaurants(filteredList);
                             console.log(filteredList);
                         },
@@ -18704,7 +18737,7 @@ const Body = ()=>{
                 className: "res-container",
                 children: filteredRestaurant.map((restaurant)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _restaurantCardDefault.default), {
                         resData: restaurant
-                    }, restaurant.data.id, false, {
+                    }, restaurant.info.id, false, {
                         fileName: "src/components/Body.js",
                         lineNumber: 96,
                         columnNumber: 11
@@ -18746,7 +18779,7 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _constants = require("../utils/constants");
 const RestaurantCard = (props)=>{
     const { resData } = props;
-    const { cloudinaryImageId, name, cuisines, avgRating, costForTwo, deliveryTime } = resData?.data;
+    const { cloudinaryImageId, name, cuisines, avgRating, costForTwo, sla } = resData?.info;
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "res-card",
         style: {
@@ -18795,19 +18828,15 @@ const RestaurantCard = (props)=>{
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h4", {
-                        children: [
-                            "\u20B9",
-                            costForTwo / 100,
-                            " FOR TWO"
-                        ]
-                    }, void 0, true, {
+                        children: costForTwo
+                    }, void 0, false, {
                         fileName: "src/components/RestaurantCard.js",
                         lineNumber: 33,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h4", {
                         children: [
-                            deliveryTime,
+                            sla.deliveryTime,
                             " minutes"
                         ]
                     }, void 0, true, {

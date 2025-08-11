@@ -11,7 +11,7 @@ const Header = () => {
     <div className="header">
       <div className="logo-container">
         <img src={LOGO_URL} alt="App Logo" className="logo" />
-      </div>                                     
+      </div>
       <div className="nav-items">
         <ul>
           <li>Home</li>
