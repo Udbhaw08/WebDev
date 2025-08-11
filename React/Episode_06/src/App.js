@@ -63,15 +63,7 @@ import Body from './components/Body';
 
 const currYear = new Date().getFullYear();
 
-const Footer = () => {
-  return (
-    <footer className="footer">
-      <p>
-        Copyright &copy; {currYear}, Made with 💗 by <strong>Vasu</strong>
-      </p>
-    </footer>
-  );
-};
+
 
 const AppLayout = () => {
   // console.log(<Body />);
@@ -79,7 +71,7 @@ const AppLayout = () => {
     <div className="app">
       <Header />
       <Body />
-      <Footer />
+
     </div>
   );
 };
