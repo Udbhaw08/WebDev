@@ -66,11 +66,12 @@ const currYear = new Date().getFullYear();
 
 
 const AppLayout = () => {
-  console.log(<Body />);
+  // console.log(<Body />);
   return (
     <div className="app">
       <Header />
       <Body />
+
     </div>
   );
 };
