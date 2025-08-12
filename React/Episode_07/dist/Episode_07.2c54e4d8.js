@@ -16341,7 +16341,7 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "CDN_URL", ()=>CDN_URL);
 parcelHelpers.export(exports, "LOGO_URL", ()=>LOGO_URL);
 parcelHelpers.export(exports, "MENU_API_URL", ()=>MENU_API_URL);
-const CDN_URL = 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_264,h_288,c_fill/';
+const CDN_URL = 'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/';
 const LOGO_URL = 'https://png.pngtree.com/png-vector/20230217/ourmid/pngtree-food-logo-design-for-restaurant-and-business-png-image_6604922.png';
 const MENU_API_URL = "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.6331132&lng=77.2972601&restaurantId=";
 
@@ -25277,10 +25277,11 @@ const Body = ()=>{
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                         className: "filter-btn",
                         onClick: ()=>{
-                            // * Filter logic
+                            // 1. Filter the original list of restaurants to get only the top-rated ones.
                             const filteredList = listOfRestaurants.filter((res)=>res.info.avgRating > 4);
-                            setListOfRestaurants(listOfRestaurants);
-                            console.log(filteredList);
+                            // 2. ✅ Update the 'filteredRestaurant' state with this new, filtered list.
+                            //    This will cause React to re-render the component and display only the top-rated restaurants.
+                            setFilteredRestaurant(filteredList);
                         },
                         children: "Top Rated Restaurants"
                     }, void 0, false, {
@@ -25300,12 +25301,12 @@ const Body = ()=>{
                         resData: restaurant
                     }, restaurant.info.id, false, {
                         fileName: "src/components/Body.js",
-                        lineNumber: 96,
+                        lineNumber: 97,
                         columnNumber: 11
                     }, undefined))
             }, void 0, false, {
                 fileName: "src/components/Body.js",
-                lineNumber: 92,
+                lineNumber: 93,
                 columnNumber: 7
             }, undefined)
         ]
@@ -25779,29 +25780,46 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _shimmer = require("./Shimmer");
 var _shimmerDefault = parcelHelpers.interopDefault(_shimmer);
-var _reactRouter = require("react-router");
+var _reactRouterDom = require("react-router-dom"); // Make sure it's react-router-dom
 var _constants = require("../utils/constants");
 var _s = $RefreshSig$();
 const RestaurantMenu = ()=>{
     _s();
     const [resInfo, setResInfo] = (0, _react.useState)(null);
-    const { resId } = (0, _reactRouter.useParams)();
+    const { resId } = (0, _reactRouterDom.useParams)();
     (0, _react.useEffect)(()=>{
         fetchMenu();
     }, []);
     const fetchMenu = async ()=>{
-        const data = await fetch((0, _constants.MENU_API_URL) + resId);
-        const json = await data.json();
-        setResInfo(json.data);
+        try {
+            const data = await fetch((0, _constants.MENU_API_URL) + resId);
+            const json = await data.json();
+            // 💡 Always log the data to inspect its structure!
+            console.log("API Data:", json.data);
+            setResInfo(json.data);
+        } catch (error) {
+            console.error("Fetch failed:", error);
+        }
     };
+    // Use a more robust check. If resInfo is null, show Shimmer.
     if (resInfo === null) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _shimmerDefault.default), {}, void 0, false, {
         fileName: "src/components/RestaurantMenu.js",
-        lineNumber: 22,
+        lineNumber: 30,
         columnNumber: 12
     }, undefined);
-    // Destructure only after confirming resInfo is not null
-    const { name, cuisines, costForTwoMessage } = resInfo?.cards[1]?.card?.card?.info;
-    const { itemCards } = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
+    // Safely find the restaurant info and menu items from the cards array
+    // The 'info' card is usually the one with the specific @type
+    const restaurantInfoCard = resInfo?.cards?.find((c)=>c?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.Restaurant");
+    const { name, cuisines, costForTwoMessage } = restaurantInfoCard?.card?.card?.info || {};
+    // The 'itemCards' are usually in a 'groupedCard'
+    const itemCards = resInfo?.cards?.find((c)=>c.groupedCard)?.groupedCard?.cardGroupMap?.REGULAR?.cards?.map((c)=>c?.card?.card)?.filter((c)=>c?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory")?.flatMap((c)=>c.itemCards) || [];
+    // If after all that we still don't have the name, something is wrong with the data.
+    // We can show a message or the shimmer again.
+    if (!name) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _shimmerDefault.default), {}, void 0, false, {
+        fileName: "src/components/RestaurantMenu.js",
+        lineNumber: 51,
+        columnNumber: 12
+    }, undefined); // or return <h2>Restaurant data not found.</h2>
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "menu",
         children: [
@@ -25809,54 +25827,54 @@ const RestaurantMenu = ()=>{
                 children: name
             }, void 0, false, {
                 fileName: "src/components/RestaurantMenu.js",
-                lineNumber: 31,
+                lineNumber: 56,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                 children: [
-                    cuisines.join(", "),
+                    cuisines?.join(", "),
                     " - ",
                     costForTwoMessage
                 ]
             }, void 0, true, {
                 fileName: "src/components/RestaurantMenu.js",
-                lineNumber: 32,
+                lineNumber: 57,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                 children: "Menu"
             }, void 0, false, {
                 fileName: "src/components/RestaurantMenu.js",
-                lineNumber: 33,
+                lineNumber: 58,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
                 children: itemCards.map((item)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                         children: [
-                            item.card.info.name,
+                            item?.card?.info?.name,
                             " - \u20B9",
-                            item.card.info.price / 100 || item.card.info.defaultPrice / 100
+                            item?.card?.info?.price / 100 || item?.card?.info?.defaultPrice / 100
                         ]
-                    }, item.card.info.id, true, {
+                    }, item?.card?.info?.id, true, {
                         fileName: "src/components/RestaurantMenu.js",
-                        lineNumber: 36,
+                        lineNumber: 61,
                         columnNumber: 11
                     }, undefined))
             }, void 0, false, {
                 fileName: "src/components/RestaurantMenu.js",
-                lineNumber: 34,
+                lineNumber: 59,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/RestaurantMenu.js",
-        lineNumber: 30,
+        lineNumber: 55,
         columnNumber: 5
     }, undefined);
 };
-_s(RestaurantMenu, "NckFqdVMETc9vwwDQNFsDMgxHwY=", false, function() {
+_s(RestaurantMenu, "Di9ZLy8XXUjRliClMcx4U9YqD/w=", false, function() {
     return [
-        (0, _reactRouter.useParams)
+        (0, _reactRouterDom.useParams)
     ];
 });
 _c = RestaurantMenu;
@@ -25869,6 +25887,6 @@ $RefreshReg$(_c, "RestaurantMenu");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","./Shimmer":"fSZbx","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","../utils/constants":"dIVBf","react-router":"4ChVy"}]},["frqA7","hh6uc"], "hh6uc", "parcelRequire8070", {}, null, null, "http://localhost:1234")
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","./Shimmer":"fSZbx","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","../utils/constants":"dIVBf","react-router-dom":"61z4w"}]},["frqA7","hh6uc"], "hh6uc", "parcelRequire8070", {}, null, null, "http://localhost:1234")
 
 //# sourceMappingURL=Episode_07.2c54e4d8.js.map

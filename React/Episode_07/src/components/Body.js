@@ -77,13 +77,14 @@ const Body = () => {
         <button
           className="filter-btn"
           onClick={() => {
-            // * Filter logic
+            // 1. Filter the original list of restaurants to get only the top-rated ones.
             const filteredList = listOfRestaurants.filter(
               (res) => res.info.avgRating > 4
             );
 
-            setListOfRestaurants(listOfRestaurants);
-            console.log(filteredList);
+            // 2. ✅ Update the 'filteredRestaurant' state with this new, filtered list.
+            //    This will cause React to re-render the component and display only the top-rated restaurants.
+            setFilteredRestaurant(filteredList);
           }}
         >
           Top Rated Restaurants
