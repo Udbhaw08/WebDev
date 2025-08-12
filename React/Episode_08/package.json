@@ -1,0 +1,22 @@
+{
+  "name": "episode-07",
+  "version": "1.0.0",
+  "description": "esp 4 ",
+  "scripts": {
+    "test": "jest",
+    "start": "parcel index.html"
+  },
+  "author": "Udbhaw Anand",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-js": "^2.15.4",
+    "parcel": "^2.15.4"
+  },
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-icons": "^5.5.0",
+    "react-router": "^6.22.3",
+    "react-router-dom": "^6.30.1"
+  }
+}
