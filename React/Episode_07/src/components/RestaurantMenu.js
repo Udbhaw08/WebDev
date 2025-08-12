@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
-import { useParams } from "react-router-dom"; // Make sure it's react-router-dom
+import { useParams } from "react-router-dom";
 import { MENU_API_URL } from "../utils/constants";
 
 const RestaurantMenu = () => {
@@ -38,33 +38,37 @@ const RestaurantMenu = () => {
   
   const { name, cuisines, costForTwoMessage } = restaurantInfoCard?.card?.card?.info || {};
 
-  // The 'itemCards' are usually in a 'groupedCard'
-  const itemCards = resInfo?.cards?.find(c => c.groupedCard)?.groupedCard?.cardGroupMap?.REGULAR?.cards
+// The 'itemCards' are usually in a 'groupedCard'. This first part gets ALL items, including duplicates.
+const allItemCards = resInfo?.cards?.find(c => c.groupedCard)?.groupedCard?.cardGroupMap?.REGULAR?.cards
     ?.map(c => c?.card?.card)
     ?.filter(c => c?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory")
     ?.flatMap(c => c.itemCards) || [];
 
+// ✅ FIX: This line creates a new array with only unique items, solving the error.
+const uniqueItemCards = Array.from(new Map(allItemCards.map(item => [item.card.info.id, item])).values());
 
-  // If after all that we still don't have the name, something is wrong with the data.
-  // We can show a message or the shimmer again.
-  if (!name) {
+
+// If after all that we still don't have the name, something is wrong with the data.
+// We can show a message or the shimmer again.
+if (!name) {
     return <Shimmer />; // or return <h2>Restaurant data not found.</h2>
-  }
+}
 
-  return (
+return (
     <div className="menu">
-      <h1>{name}</h1>
-      <p>{cuisines?.join(", ")} - {costForTwoMessage}</p>
-      <h2>Menu</h2>
-      <ul>
-        {itemCards.map((item) => (
-          <li key={item?.card?.info?.id}>
-            {item?.card?.info?.name} - ₹{item?.card?.info?.price / 100 || item?.card?.info?.defaultPrice / 100}
-          </li>
-        ))}
-      </ul>
+        <h1>{name}</h1>
+        <p>{cuisines?.join(", ")} - {costForTwoMessage}</p>
+        <h2>Menu</h2>
+        <ul>
+            {/* ✅ Use the clean, unique list for rendering */}
+            {uniqueItemCards.map((item) => (
+                <li key={item?.card?.info?.id}>
+                    {item?.card?.info?.name} - ₹{item?.card?.info?.price / 100 || item?.card?.info?.defaultPrice / 100}
+                </li>
+            ))}
+        </ul>
     </div>
-  );
+);
 };
 
 export default RestaurantMenu;
