@@ -11,7 +11,7 @@ const Login = () => {
           alt="logo"
         />
       </div>
-
+ 
       <form className="w-3/12 absolute p-12 bg-black my-20 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-85">
         <h1 className="font-bold texty-3xl py-4 ">Sign In</h1>
 
